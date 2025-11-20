@@ -96,6 +96,7 @@ def sims():
     x = np.arange(x_0_l, x_max_l, step)
     a_l = 1 # area of air column
     p_0_l = 100 # initial presure
+    p = 10 # air pressure
     gamma = 1.4 # adiabatic constant
 
     plt.subplot(3,1,3)
@@ -110,24 +111,24 @@ def sims():
     plt.show()
 
 
-# x_mesured = 10
-#
-# plt.figure(1)
-# plt.plot(
-#         simulation(lambda v: -k/m*v, v_x_0, x_0),
-#         simulation(lambda v: -g-k/m*v, v_y_0, y_0),
-#         label="simulation forttement v")
-#
-# k = minimize(lambda c: abs(simulation(lambda v: -c/m*v, v_x_0, x_0)[simulation(lambda v: -g-c/m*v, v_y_0, y_0) != 0][-1] - x_mesured), x0=[k]).x
-# print(k)
-# plt.plot(
-#         simulation(lambda v: -k/m*v, v_x_0, x_0),
-#         simulation(lambda v: -g-k/m*v, v_y_0, y_0),
-#         label="simulation forttement v")
-# plt.xlabel("x [m]")
-# plt.ylabel("y [m]")
-# plt.legend()
+x_mesured = 10
 
-# plt.show()
+plt.figure(1)
+plt.plot(
+        simulation(lambda v: -k/m*v, v_x_0, x_0),
+        simulation(lambda v: -g-k/m*v, v_y_0, y_0),
+        label="simulation forttement v")
 
-sims()
+k = minimize(lambda c: abs(simulation(lambda v: -c/m*v, v_x_0, x_0)[simulation(lambda v: -g-c/m*v, v_y_0, y_0) != 0][-1] - x_mesured), x0=[k]).x
+print(k)
+plt.plot(
+        simulation(lambda v: -k/m*v, v_x_0, x_0),
+        simulation(lambda v: -g-k/m*v, v_y_0, y_0),
+        label="simulation forttement v")
+plt.xlabel("x [m]")
+plt.ylabel("y [m]")
+plt.legend()
+
+plt.show()
+
+# sims()
