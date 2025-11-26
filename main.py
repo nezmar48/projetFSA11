@@ -1,5 +1,7 @@
 import optimize
 import simulation
+import tracker
+import pressure
 
 def quit():
     print("Quitting")
@@ -10,7 +12,9 @@ def main():
         "quit": quit,
         "sims": simulation.sims,
         "v0" : optimize.find_v0_shell,
-        "c" : optimize.find_c_shell
+        "c" : optimize.find_c_shell,
+        "tracker" : tracker.tracker_shell,
+        "test" : pressure.test
     }
 
     print("Simple shell. Type a command:")
