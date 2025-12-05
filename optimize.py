@@ -10,7 +10,7 @@ m = 0.1
 a_x = lambda v, c: -c/m*abs(v)*v
 a_y = lambda v, c:-g-c/m*abs(v)*v
 
-def find(c, v0, x):
+def dif(c, v0, x):
     xy = sm.simulation_xy(
         sm.SimC(a= lambda v : a_x(v,c), v_0 = v0),
         sm.SimC(a=lambda v : a_y(v,c), v_0 = v0)
@@ -29,7 +29,7 @@ def find_c_shell():
             print("Input must be a float")
             quit = False
 
-    c_opt = brentq(lambda c: find(c, v_mesured, x_mesured), 0, 20)
+    c_opt = brentq(lambda c: dif(c, v_mesured, x_mesured), 0, 20)
     xy_opt = sm.simulation_xy(
         sm.SimC(a=lambda v : a_x(v,c_opt), v_0 = v_mesured),
         sm.SimC(a=lambda v : a_y(v,c_opt), v_0 = v_mesured)
@@ -53,7 +53,7 @@ def find_v0_shell():
             quit = False
 
     c = 0.01
-    v0_wanted = brentq(lambda v: find(c, v, x_needed), 0, 50)
+    v0_wanted = brentq(lambda v: dif(c, v, x_needed), 0, 50)
     xy_v0 = sm.simulation_xy(
         sm.SimC(a= lambda v : a_x(v,c), v_0 = v0_wanted),
         sm.SimC(a=lambda v : a_y(v,c), v_0 = v0_wanted)
