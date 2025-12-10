@@ -1,3 +1,5 @@
+#optimize.py
+#find parameters using the euler method
 import math
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,9 +8,11 @@ import simulation as sm
 
 g = 9.81
 
+#acceleration functions
 a_x = lambda v, c: -c*abs(v)*v
 a_y = lambda v, c:-g-c*abs(v)*v
 
+#difference from simulaed and actual distance
 def dif(c, v0, x, angle):
     xy = sm.simulation_xy(
         sm.SimC(a = lambda v : a_x(v,c), v_0 = v0 * math.cos(angle)),
@@ -29,6 +33,7 @@ def find_c_shell():
             print("Input must be a float")
             quit = False
 
+    # use brenteq to find zeros of a function (here the difference in distance as a function of coefficient)
     c_opt = brentq(lambda c: dif(c, v_mesured, x_mesured, angle), 0, 20)
     print("The balls drag coefficient is: " + str(c_opt))
     xy_opt = sm.simulation_xy(
@@ -41,6 +46,7 @@ def find_c_shell():
     plt.ylabel("y [m]")
     plt.show()
 
+# find v0 to attaign a distance
 def find_v0_shell():
     quit = False
     while not quit:

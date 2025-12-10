@@ -1,3 +1,5 @@
+# main.py
+# this file provides a shell to lunch the different functions of the program
 import optimize
 import simulation
 import tracker
@@ -10,11 +12,11 @@ def quit():
 def main():
     commands = {
         "quit": quit,
-        "sims": simulation.sims,
-        "v0" : optimize.find_v0_shell,
-        "c" : optimize.find_c_shell,
-        "tracker" : tracker.tracker_shell,
-        "test" : pressure.test
+        "sims": simulation.sims, #show graphs of simulations
+        "v0" : optimize.find_v0_shell, #find velocity to attaign a distance
+        "c" : optimize.find_c_shell, #find the constant of drag
+        "tracker" : tracker.tracker_shell, #analyze tracker data
+        #"test" : pressure.test #this function was not implemented
     }
 
     print("Simple shell. Type a command:")

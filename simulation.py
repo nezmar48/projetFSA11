@@ -1,3 +1,5 @@
+#simulation.py
+#simulate balistic prajectories
 import math
 import matplotlib.pyplot as plt
 import numpy as np
@@ -5,19 +7,22 @@ import numpy as np
 end = 3
 step = 0.001
 
+#simulation in one dimention
 class SimC:
     def __init__(self, x_0 = 0, v_0=10, a = lambda v: 0):
-        self.x = np.zeros(int(end/step))
+        self.x = np.zeros(int(end/step)) #position as function of time step
         self.x[0] = x_0
-        self.v_0 = v_0
-        self.a = a
+        self.v_0 = v_0 #initial velocity
+        self.a = a #acceleration function
 
+    #euler method
     def simulate(self):
         v = self.v_0
         for i in range(len(self.x)-1):
             v += self.a(v) * step
             self.x[i+1] = self.x[i] + v * step
 
+# merge simulations in two dimensins
 def simulation_xy(sim_x=None, sim_y=None):
     if sim_x is None:
         sim_x = SimC()
@@ -27,6 +32,7 @@ def simulation_xy(sim_x=None, sim_y=None):
     sim_x.simulate()
     sim_y.simulate()
 
+    # end simulation at ground level
     index = len(sim_y.x)
     for i in range(1, len(sim_y.x)):
         if sim_y.x[i] < 0 and  (sim_y.x[i-1] - sim_y.x[i]) > 0:
@@ -35,6 +41,7 @@ def simulation_xy(sim_x=None, sim_y=None):
 
     return (sim_x.x[:index], sim_y.x[:index])
 
+# show graphs
 def sims():
     m = 0.1
     k = 0.1
@@ -61,7 +68,7 @@ def sims():
     plt.plot(sim_linear_drag[0], sim_linear_drag[1], label="simulation forttement v")
     plt.plot(sim_quadratic_drag[0], sim_quadratic_drag[1], label="simulation frottement v^2")
 
-# analytique 
+# analytique
     x_0 = 0
     y_0 = 0
     v_x_0 = 10
@@ -80,23 +87,3 @@ def sims():
     plt.xlabel("x [m]")
     plt.ylabel("y [m]")
     plt.legend()
-
-# energie
-    x_0_l = 1 # initial lenght of air column
-    x_max_l = 10
-    x = np.arange(x_0_l, x_max_l, step)
-    a_l = 1 # area of air column
-    p_0_l = 100 # initial presure
-    p = 10 # air pressure
-    gamma = 1.4 # adiabatic constant
-
-    plt.subplot(3,1,3)
-    e_k = (p_0_l * a_l*(x_0_l**gamma) /(1 - gamma))  * (x**(1 -gamma) - x_0_l ** (1 - gamma))
-    e_p = p_0_l*a_l*(x_0_l**gamma)/ (gamma - 1)* (x**(1 - gamma))
-    plt.plot(x, e_k, label="energie kinetique")
-    plt.plot(x, e_p, label="energie potentielle")
-    plt.plot(x, e_p + e_k, label="energie totale")
-    plt.xlabel("x [m]")
-    plt.ylabel("E[J]")
-    plt.legend()
-    plt.show()

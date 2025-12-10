@@ -1,10 +1,12 @@
+#tracker.py
+#analyze tracker data
 import math
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+#one row of data
 class Mesure:
-
     def __init__(self,temps,x,y,vitesseX,vitesseY):
         self.temps = temps
         self.x = x
@@ -12,6 +14,7 @@ class Mesure:
         self.vitesseX = vitesseX
         self.vitesseY = vitesseY
 
+#full data table
 class Tableau_de_mesure:
     def __init__(self):
         self.mesures=[]
@@ -24,6 +27,7 @@ class Tableau_de_mesure:
         self.y.append(mesure.y)
         self.t.append(mesure.temps)
 
+#read data from file
 def read_tracker(file_name):
     #on va parcourir le fichier texte et stocker les mesures dans un tableau
 
@@ -44,6 +48,7 @@ def read_tracker(file_name):
             table.add_mesure(mesure)
     return table
 
+#plot data
 def plot_tracker(table):
     print("nombre de mesures : ", len(table.mesures))
     print(" les temps : " , table.t)
@@ -61,6 +66,7 @@ def plot_tracker(table):
     plt.tight_layout()
     plt.show()
 
+#shell helper
 def tracker_shell():
     file_name = input("Enter filename: ")
     try:
