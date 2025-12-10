@@ -19,7 +19,7 @@ def main():
         #"test" : pressure.test #this function was not implemented
     }
 
-    print("Simple shell. Type a command:")
+    print("Type a command:")
     while True:
         cmd = input("> ").strip().lower()
         if cmd in commands:

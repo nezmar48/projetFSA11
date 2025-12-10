@@ -49,16 +49,17 @@ def read_tracker(file_name):
     return table
 
 #plot data
-def plot_tracker(table):
+def plot_tracker(tables):
     print("nombre de mesures : ", len(table.mesures))
     print(" les temps : " , table.t)
     print(" les y : " , table.y)
     #on veut tracer un graphique avec les mesures
     plt.figure(1)
     #on doit pouvoir récupérer les coordonnées
-    plt.plot(table.t,table.y,
-        label="",
-        color="magenta")
+    for table in tables:
+        plt.plot(table.t,table.y,
+            label="",
+           )
 
     plt.xlabel("t [s]")
     plt.ylabel("y [m]")
@@ -68,11 +69,20 @@ def plot_tracker(table):
 
 #shell helper
 def tracker_shell():
-    file_name = input("Enter filename: ")
     try:
-        open(file_name)
-        close(file_name)
+        num = int(imput("Number of files: "))
     except:
-        print("unable to open file")
+        print("input must be int")
         return
-    plot_tracker(read_tracker(file_name))
+    tables = []
+    for i in range(num):
+        file_name = input("Enter filename: ")
+        try:
+            with open(file_name, "r"):
+                pass
+        except:
+            print("unable to open file")
+            return
+        tables.append(read_tracker(filename))
+
+    plot_tracker(tables)
