@@ -35,7 +35,7 @@ def simulation_xy(sim_x=None, sim_y=None):
     # end simulation at ground level
     index = len(sim_y.x)
     for i in range(1, len(sim_y.x)):
-        if sim_y.x[i] < 0 and  (sim_y.x[i-1] - sim_y.x[i]) > 0:
+        if sim_y.x[i] < 0 and (sim_y.x[i-1] - sim_y.x[i]) > 0:
             index = i
             break
 
@@ -87,3 +87,4 @@ def sims():
     plt.xlabel("x [m]")
     plt.ylabel("y [m]")
     plt.legend()
+    plt.show()

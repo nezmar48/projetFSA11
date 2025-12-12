@@ -57,7 +57,7 @@ def read_tracker(file_name):
         for ligne in f:
             row = []
             try:
-                for p in ligne.replace(",",".").split(";"): #may be different in your file
+                for p in ligne.replace(",",".").split("\t"): #may be different in your file
                     row.append(float(p.strip()))
             except:
                 break
@@ -74,7 +74,7 @@ def plot_tracker(tables):
     c = optimize.find_c((t.vx[0] + t.vx[1])/2, (t.vy[0] + t.vy[1])/2, t.y[0], t.x[-1])
     i = 1
     for table in tables:
-        plt.plot(table.x,table.y, label = "mesurment " + str(i))
+        plt.plot(table.x,table.y, label = "measurement " + str(i))
         sim = sm.simulation_xy(
             sm.SimC(a=lambda v : optimize.a_x(v,c), v_0 = (table.vx[0] + table.vx[1])/2),
             sm.SimC(a=lambda v : optimize.a_y(v,c), v_0 = (table.vy[0] + table.vy[1])/2, x_0 = table.y[0])

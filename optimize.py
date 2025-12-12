@@ -23,7 +23,7 @@ def dif(c, vx0, vy0, y0, x):
 # find the drag coefficient wich describes compleately the ball - size and mass included
 def find_c(vx0, vy0, y0, x_m):
     # use brenteq to find zeros of a function (here the difference in distance as a function of coefficient)
-    return brentq(lambda c: dif(c, vx0, vy0, y0, x_m), 0, 100)
+    return brentq(lambda c: dif(c, vx0, vy0, y0, x_m), 0, 10)
 
 # helper function for shell
 def find_c_shell():
