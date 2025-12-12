@@ -1,5 +1,5 @@
-# main.py
-# this file provides a shell to lunch the different functions of the program
+#main.py
+#this file provides a shell to lunch the different functions of the program
 import optimize
 import simulation
 import tracker

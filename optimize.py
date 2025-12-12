@@ -20,12 +20,12 @@ def dif(c, vx0, vy0, y0, x):
     )
     return xy[0][-1] - x
 
-# find the drag coefficient wich describes compleately the ball - size and mass included
+#find the drag coefficient wich describes compleately the ball - size and mass included
 def find_c(vx0, vy0, y0, x_m):
     # use brenteq to find zeros of a function (here the difference in distance as a function of coefficient)
     return brentq(lambda c: dif(c, vx0, vy0, y0, x_m), 0, 10)
 
-# helper function for shell
+#helper function for shell
 def find_c_shell():
     quit = False
     while not quit:
@@ -54,7 +54,7 @@ def find_c_shell():
     plt.ylabel("y [m]")
     plt.show()
 
-# find v0 to attaign a distance
+#find v0 to attaign a distance
 def find_v0_shell():
     quit = False
     while not quit:

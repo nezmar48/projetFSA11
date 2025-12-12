@@ -22,7 +22,7 @@ class SimC:
             v += self.a(v) * step
             self.x[i+1] = self.x[i] + v * step
 
-# merge simulations in two dimensins
+#merge simulations in two dimensins
 def simulation_xy(sim_x=None, sim_y=None):
     if sim_x is None:
         sim_x = SimC()
@@ -32,7 +32,7 @@ def simulation_xy(sim_x=None, sim_y=None):
     sim_x.simulate()
     sim_y.simulate()
 
-    # end simulation at ground level
+    #end simulation at ground level
     index = len(sim_y.x)
     for i in range(1, len(sim_y.x)):
         if sim_y.x[i] < 0 and (sim_y.x[i-1] - sim_y.x[i]) > 0:
@@ -41,7 +41,7 @@ def simulation_xy(sim_x=None, sim_y=None):
 
     return (sim_x.x[:index], sim_y.x[:index])
 
-# show graphs
+#show graphs
 def sims():
     m = 0.1
     k = 0.1
@@ -49,7 +49,7 @@ def sims():
     g = 9.81
     plt.figure(1)
 
-# simultations
+#simultations
     sim_no_drag = simulation_xy(
         SimC(a=lambda v: 0),
         SimC(a=lambda v: -g )
@@ -68,7 +68,7 @@ def sims():
     plt.plot(sim_linear_drag[0], sim_linear_drag[1], label="simulation forttement v")
     plt.plot(sim_quadratic_drag[0], sim_quadratic_drag[1], label="simulation frottement v^2")
 
-# analytique
+#analytique
     x_0 = 0
     y_0 = 0
     v_x_0 = 10
